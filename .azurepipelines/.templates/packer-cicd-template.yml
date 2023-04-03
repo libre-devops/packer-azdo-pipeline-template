@@ -139,9 +139,9 @@ steps:
           $nsgName = Split-Path -Path $nsgId -Leaf ; `
           az account set --subscription $subscriptionId
           az network nsg rule delete `
-          --nsg-name $nsgName `
           --resource-group $resourceGroupName `
-          --name "AddClientIPInbound" `
+          --nsg-name $nsgName `
+          --name "AddClientIPInbound"
 
         displayName: 'Remove Temporary Rule'
         continueOnError: true
