@@ -48,9 +48,6 @@ parameters:
 
 
 steps:
-  - bash : |
-      ls -lah
-    enabled: true
 
   - pwsh: |
       if ($IsLinux)
