@@ -6,6 +6,11 @@ parameters:
     default: ""
     displayName: "What is the path to your packer HCL file?"
 
+  - name: PACKER_FILE_NAME
+    type: string
+    default: "packer.pkr.hcl"
+    displayName: "What is the name of your packer HCL file?"
+
   - name: AZURE_TARGET_CLIENT_ID
     default: ""
     type: string
@@ -48,18 +53,18 @@ steps:
       if ($IsLinux)
       {
       brew install packer ; `
-      packer validate ${{ parameters.PACKER_PATH }} ; packer build ${{ parameters.PACKER_PATH }}
+      packer validate ${{ parameters.PACKER_PATH }}/${{ parameters.PACKER_FILE_NAME }}  ; packer build ${{ parameters.PACKER_PATH }}/${{ parameters.PACKER_FILE_NAME }} 
       }
       elseif ($IsMacOS)
       {
       brew install packer ; `
-      packer validate ${{ parameters.PACKER_PATH }} ; packer build ${{ parameters.PACKER_PATH }}
+      packer validate ${{ parameters.PACKER_PATH }}/${{ parameters.PACKER_FILE_NAME }}  ; packer build ${{ parameters.PACKER_PATH }}/${{ parameters.PACKER_FILE_NAME }} 
       }
       elseif ($IsWindows)
       {
         Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
         choco install packer -y ; `
-        packer validate ${{ parameters.PACKER_PATH }} ; packer build ${{ parameters.PACKER_PATH }}
+        packer validate ${{ parameters.PACKER_PATH }}/${{ parameters.PACKER_FILE_NAME }} ; ${{ parameters.PACKER_PATH }}/${{ parameters.PACKER_FILE_NAME }} 
       }
     displayName: 'Packer install, validate and build'
     workingDirectory: "${{ parameters.PACKER_PATH }}"
