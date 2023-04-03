@@ -67,7 +67,6 @@ steps:
         packer validate ${{ parameters.PACKER_PATH }}/${{ parameters.PACKER_FILE_NAME }} ; ${{ parameters.PACKER_PATH }}/${{ parameters.PACKER_FILE_NAME }} 
       }
     displayName: 'Packer install, validate and build'
-    workingDirectory: "${{ parameters.PACKER_PATH }}"
     continueOnError: false
     enabled: true
     env:
