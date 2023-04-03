@@ -12,7 +12,7 @@ parameters:
     displayName: "What is the name of your packer HCL file?"
 
   - name: ADD_CLIENT_IP_TO_NSG
-    type: bool
+    type: boolean
     default: false
     displayName: "If the client IP should be added to the NSG"
 
@@ -58,7 +58,7 @@ parameters:
 
 
 steps:
-  - ${{ if (eq(parameters.ADD_CLIENT_IP_TO_NSG, true) }}:
+  - ${{ if eq(parameters.ADD_CLIENT_IP_TO_NSG, true) }}:
 
       - pwsh: |
           $OutboundIp = (Invoke-RestMethod -Uri "https://checkip.amazonaws.com" -UseBasicParsing).Trim() ; `
@@ -90,7 +90,6 @@ steps:
           ARM_CLIENT_SECRET: ${{ parameters.AZURE_TARGET_CLIENT_SECRET }}
           ARM_SUBSCRIPTION_ID: ${{ parameters.AZURE_TARGET_SUBSCRIPTION_ID }}
           ARM_TENANT_ID: ${{ parameters.AZURE_TARGET_TENANT_ID }}
-
 
       - pwsh: |
           if ($IsLinux)
@@ -154,7 +153,7 @@ steps:
           ARM_SUBSCRIPTION_ID: ${{ parameters.AZURE_TARGET_SUBSCRIPTION_ID }}
           ARM_TENANT_ID: ${{ parameters.AZURE_TARGET_TENANT_ID }}
 
-  - ${{ if (eq(parameters.ADD_CLIENT_IP_TO_NSG, false) }}:
+  - ${{ if eq(parameters.ADD_CLIENT_IP_TO_NSG, false) }}:
 
       - pwsh: |
           if ($IsLinux)
