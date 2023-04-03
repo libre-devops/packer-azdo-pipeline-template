@@ -52,7 +52,7 @@ steps:
   - pwsh: |
       if ($IsLinux)
       {
-     $brewShellEnv = & /home/linuxbrew/.linuxbrew/bin/brew shellenv
+      $brewShellEnv = & /home/linuxbrew/.linuxbrew/bin/brew shellenv
       foreach ($line in $brewShellEnv) {
       Invoke-Expression $line
       }
