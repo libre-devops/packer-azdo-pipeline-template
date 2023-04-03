@@ -8,7 +8,7 @@ parameters:
 
   - name: PACKER_FILE_NAME
     type: string
-    default: "packer.pkr.hcl"
+    default: ""
     displayName: "What is the name of your packer HCL file?"
 
   - name: AZURE_TARGET_CLIENT_ID
