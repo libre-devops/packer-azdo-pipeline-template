@@ -62,7 +62,9 @@ steps:
       elseif ($IsMacOS)
       {
       $brewShellEnv = & /home/linuxbrew/.linuxbrew/bin/brew shellenv
-      Invoke-Expression $brewShellEnv
+      foreach ($line in $brewShellEnv) {
+      Invoke-Expression $line
+      }
       brew install packer ; `
       packer validate ${{ parameters.PACKER_PATH }}/${{ parameters.PACKER_FILE_NAME }}  ; packer build ${{ parameters.PACKER_PATH }}/${{ parameters.PACKER_FILE_NAME }} 
       }
