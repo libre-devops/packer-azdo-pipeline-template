@@ -52,8 +52,10 @@ steps:
   - pwsh: |
       if ($IsLinux)
       {
-      $brewShellEnv = & /home/linuxbrew/.linuxbrew/bin/brew shellenv
-      Invoke-Expression $brewShellEnv
+     $brewShellEnv = & /home/linuxbrew/.linuxbrew/bin/brew shellenv
+      foreach ($line in $brewShellEnv) {
+      Invoke-Expression $line
+      }
       brew install packer ; `
       packer validate ${{ parameters.PACKER_PATH }}/${{ parameters.PACKER_FILE_NAME }}  ; packer build ${{ parameters.PACKER_PATH }}/${{ parameters.PACKER_FILE_NAME }} 
       }
